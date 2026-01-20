@@ -33,7 +33,7 @@ permissions:
   pull-requests: read
 
 jobs:
-  test-and-deploy:
+  test:
     name: Test and Deploy Node.js Application
     runs-on: ubuntu-latest
     steps:
