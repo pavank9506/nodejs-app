@@ -28,6 +28,10 @@ on:
 
 permissions:
   contents: read
+  id-token: write
+  contents: read
+  security-events: write
+  pull-requests: read
 
 jobs:
   test-and-deploy:
@@ -43,16 +47,35 @@ jobs:
         #   node-version: '18'
           
       - name: Install Dependencies
-        run: npm install
+        run: |
+          npm install
+          npm install coverage
+
+      - name: Generate SBOM for source
+        uses: anchore/sbom-action@v0
+        with:
+          path: .
+          format: spdx-json
+          output-file: sbom-source.spdx.json
+
+      - name: Upload SBOM Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: sbom-source
+          path: sbom-source.spdx.json
 
       - name: Run Unit Tests
-        run: npm test
-        
-      - name: Run Integration Tests
-        run: npm run test:integration
+        run: |
+          npm test
+          npm run coverage report -m --fail-under=80
 
-      - name: Deploy Node.js Application
-        run: nohup npm start &
+      - name: Run Integration Tests
+        run: |
+          npm run test:integration
+          npm run coverage report -m --fail-under=80
+
+      # - name: Deploy Node.js Application
+      #   run: nohup npm start &
 
   # setup-build-publish-deploy:
   #   name: Setup, Build, Publish, and Deploy
