@@ -71,17 +71,6 @@ jobs:
         run: |
           npm run test:integration -- --coverage --fail-on-coverage-threshold=80
 
-      - name: Generate Coverage HTML Report
-        run: |
-          coverage html
-          coverage xml
-
-      - name: Upload Coverage Report
-        uses: actions/upload-artifact@v4
-        with:
-          name: coverage-report
-          path: htmlcov/
-
       # - name: Deploy Node.js Application
       #   run: nohup npm start &
 
