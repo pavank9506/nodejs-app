@@ -6,7 +6,7 @@ on:
 
 jobs:
   call-reusable-workflow:
-    uses: resharable-workflow/.github/workflows/reusable-workflow.yaml@main
+    uses: pavank9506/resharable-workflow/.github/workflows/reusable-workflow.yaml@main
     with:
       app_language: python
       docker_image_name: pavan095/github_action_docker_python
