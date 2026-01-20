@@ -65,13 +65,11 @@ jobs:
 
       - name: Run Unit Tests
         run: |
-          npm test
-          npm run coverage report -m --fail-under=80
+          npm test -- --coverage --fail-on-coverage-threshold=80
 
       - name: Run Integration Tests
         run: |
-          npm run test:integration
-          npm run coverage report -m --fail-under=80
+          npm run test:integration -- --coverage --fail-on-coverage-threshold=80
 
       # - name: Deploy Node.js Application
       #   run: nohup npm start &

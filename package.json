@@ -3,10 +3,10 @@
   "version": "1.0.0",
   "main": "src/server.js",
   "scripts": {
-    "start": "node src/server.js",
+    "start": "node src/app.js",
     "test": "jest",
-    "test:unit": "jest tests/unit",
-    "test:integration": "jest tests/integration"
+    "test:integration": "jest tests/integration",
+    "coverage": "jest --coverage"
   },
   "dependencies": {
     "express": "^4.19.2"
